@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Music
+  - Enemy
+  - Item
+  - NPC
   layers:
   - Default
   - TransparentFX

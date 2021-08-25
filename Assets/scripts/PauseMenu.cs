@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class PauseMenu : MonoBehaviour
@@ -16,7 +17,9 @@ public class PauseMenu : MonoBehaviour
     [Header("Keybinds")]
     public KeySetup[] keySetUp;
 #endif
-    // Start is called before the first frame update
+
+    public bool isPaused;
+
     void Awake()
     {
 #if UNITY_EDITOR
@@ -42,11 +45,86 @@ public class PauseMenu : MonoBehaviour
         //IMGUIScript.KeySetup[] currentKey;
         //add key according to the saved string or default
 #endif
+        UnPaused();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Paused() //when Paused is triggered
     {
+        //stop time
+        Time.timeScale = 0;
+        //free our cursor
+        Cursor.lockState = CursorLockMode.Confined;
+        //see our cursor
+        Cursor.visible = true;
+    }
+
+    public void UnPaused() //when UnPaused is triggered
+    {
+        //unpause our game if attached to a button - doesn't matter if escape toggle
+        isPaused = false;
+        //start time
+        Time.timeScale = 1;
+        //lock our cursor 
+        Cursor.lockState = CursorLockMode.Locked;
+        //hide our cursor
+        Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+
+            if (isPaused)
+            {
+                Paused();
+            }
+            else
+            {
+                UnPaused();
+            }
+
+        }
         
+    }
+
+    private void OnGUI()
+    {
+        if (isPaused)
+        {
+            MenuLayout();
+        }
+    }
+
+    void MenuLayout()
+    {
+        //background
+        GUI.Box(new Rect(1 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y, 14 * IMGUIScript.scr.x, 7 * IMGUIScript.scr.y), "");
+        
+        //title
+        GUI.Box(new Rect(2 * IMGUIScript.scr.x, 2 * IMGUIScript.scr.y, 12 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Paused");
+        
+        //return if gui button on screen is pressed
+        if (GUI.Button(new Rect(2.5f * IMGUIScript.scr.x, 4 * IMGUIScript.scr.y, 5 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Return"))
+        {
+            UnPaused(); 
+        }
+        
+        //main menu
+        if (GUI.Button(new Rect(8.5f * IMGUIScript.scr.x, 4 * IMGUIScript.scr.y, 5 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Main Menu"))
+        {
+            //change scene
+            SceneManager.LoadScene(0);
+        }
+        
+        //exit
+        if (GUI.Button(new Rect(5.5f * IMGUIScript.scr.x, 6 * IMGUIScript.scr.y, 5 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Exit"))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; //makes unity look like it closes - dev code
+#endif
+            Application.Quit(); //this will not quit unity, but the application itself. so during testing it wont quit
+        }
     }
 }
