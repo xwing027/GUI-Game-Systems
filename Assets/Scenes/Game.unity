@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: 0
-  sensitivity: {x: 30, y: 30}
+  sensitivity: {x: 20, y: 20}
   rotationRangeY: {x: -60, y: 60}
 --- !u!114 &1138578407
 MonoBehaviour:
@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: 0
-  sensitivity: {x: 80, y: 80}
+  sensitivity: {x: 20, y: 20}
   rotationRangeY: {x: -60, y: 60}
 --- !u!1 &2042997694
 GameObject:

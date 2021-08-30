@@ -46,9 +46,13 @@ public class LinearDialogue : MonoBehaviour
                     //set index back to 0
                     index = 0;
                     //allow mouselook to be turned back on
+
                     //get the movement on the character and turn that back on
+                    Time.timeScale = 1;
                     //lock the mouse cursor
+                    Cursor.lockState = CursorLockMode.Locked;
                     //set the cursor to being invisible
+                    Cursor.visible = false;
                 }
             }
         }
