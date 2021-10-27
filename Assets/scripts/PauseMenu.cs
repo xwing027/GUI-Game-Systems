@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
     public KeySetup[] keySetUp;
 #endif
 
-    public bool isPaused;
+    public static bool isPaused;
 
     void Awake()
     {
@@ -60,8 +60,6 @@ public class PauseMenu : MonoBehaviour
 
     public void UnPaused() //when UnPaused is triggered
     {
-        //unpause our game if attached to a button - doesn't matter if escape toggle
-        isPaused = false;
         //start time
         Time.timeScale = 1;
         //lock our cursor 
@@ -79,10 +77,15 @@ public class PauseMenu : MonoBehaviour
             if (isPaused)
             {
                 Paused();
+                isPaused = true;
             }
             else
             {
-                UnPaused();
+                if (Inventory.showInv)
+                {
+                    UnPaused();
+                }
+                isPaused = false;
             }
 
         }
@@ -104,16 +107,22 @@ public class PauseMenu : MonoBehaviour
         
         //title
         GUI.Box(new Rect(2 * IMGUIScript.scr.x, 2 * IMGUIScript.scr.y, 12 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Paused");
-        
+
         //return if gui button on screen is pressed
         if (GUI.Button(new Rect(2.5f * IMGUIScript.scr.x, 4 * IMGUIScript.scr.y, 5 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Return"))
         {
-            UnPaused(); 
+            if (!Inventory.showInv)
+            {
+                UnPaused();
+            }
+            isPaused = false;
         }
         
         //main menu
         if (GUI.Button(new Rect(8.5f * IMGUIScript.scr.x, 4 * IMGUIScript.scr.y, 5 * IMGUIScript.scr.x, 1 * IMGUIScript.scr.y), "Main Menu"))
         {
+            Time.timeScale = 1f;
+            isPaused = false;
             //change scene
             SceneManager.LoadScene(0);
         }

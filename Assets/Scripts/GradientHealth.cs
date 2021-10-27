@@ -8,12 +8,12 @@ public class GradientHealth : Attributes
     public Canvas enemyHealthDisplay;
     Transform cam;
 
-    public void Start()
+    public virtual void Start()
     {
         cam = Camera.main.transform;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         SetHealth();
         //face the bar to the player's camera
