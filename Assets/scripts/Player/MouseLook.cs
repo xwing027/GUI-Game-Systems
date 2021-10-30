@@ -52,26 +52,30 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region Mouse X
-        //if we are rotating on the X
-        if (axis == RotationalAxis.MouseX)
+        if (!(PauseMenu.isPaused || Inventory.showInv))
         {
-            //transform the rotation on our game objects Y by our Mouse inpute mouse X times X sensitivity
-            transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
-        }
-        #endregion
 
-        #region Mouse Y
-        //else we are only rotating on the Y
-        else
-        {
-            // our rotation is plus equals our mouse input for mouse Y times Y sensitivity
-            _rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
-            //the rotation Y is clamped using mathf and we are clamping the y rotation to the y min and y max
-            _rotationY = Mathf.Clamp(_rotationY, rotationRangeY.x, rotationRangeY.y);
-            //transforms our local euler angle to the next vector3 rotation -rotationy on the x axis
-            transform.localEulerAngles = new Vector3(-_rotationY, 0, 0);        
+            #region Mouse X
+            //if we are rotating on the X
+            if (axis == RotationalAxis.MouseX)
+            {
+                //transform the rotation on our game objects Y by our Mouse inpute mouse X times X sensitivity
+                transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivity.x, 0);
+            }
+            #endregion
+
+            #region Mouse Y
+            //else we are only rotating on the Y
+            else
+            {
+                // our rotation is plus equals our mouse input for mouse Y times Y sensitivity
+                _rotationY += Input.GetAxis("Mouse Y") * sensitivity.y;
+                //the rotation Y is clamped using mathf and we are clamping the y rotation to the y min and y max
+                _rotationY = Mathf.Clamp(_rotationY, rotationRangeY.x, rotationRangeY.y);
+                //transforms our local euler angle to the next vector3 rotation -rotationy on the x axis
+                transform.localEulerAngles = new Vector3(-_rotationY, 0, 0);
+            }
+            #endregion
         }
-        #endregion
     }
 }

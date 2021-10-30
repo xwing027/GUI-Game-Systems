@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKey(KeyCode.I))
         {
             inv.Add(ItemData.CreateItem(Random.Range(0, 3)));
         }
@@ -158,7 +158,7 @@ public class Inventory : MonoBehaviour
         //icon
         GUI.Box(new Rect(4 * IMGUIScript.scr.x, IMGUIScript.scr.y * 0.5f, IMGUIScript.scr.x * 3, IMGUIScript.scr.y * 3), selectedItem.IconName);
         //desc, amount, value
-        GUI.Box(new Rect(4 * IMGUIScript.scr.x, IMGUIScript.scr.y * 3.25f, IMGUIScript.scr.x * 3, IMGUIScript.scr.y * 0.45f), selectedItem.Description+"\nAmount: "+selectedItem.Amount+"\n$"+selectedItem.Value);
+        GUI.Box(new Rect(4 * IMGUIScript.scr.x, IMGUIScript.scr.y * 3.25f, IMGUIScript.scr.x * 3, IMGUIScript.scr.y * 1f), selectedItem.Description+"\nAmount: "+selectedItem.Amount+"\n$"+selectedItem.Value);
         //switch via type
         switch (selectedItem.ItemType)
         {
@@ -203,7 +203,7 @@ public class Inventory : MonoBehaviour
             case ItemTypes.Quest:
                 break;
             case ItemTypes.Food:
-                if (GUI.Button(new Rect(4 * IMGUIScript.scr.x, IMGUIScript.scr.y * 3.25f, IMGUIScript.scr.x * 1.5f, IMGUIScript.scr.y * 0.45f), "Eat"))
+                if (GUI.Button(new Rect(4 * IMGUIScript.scr.x, IMGUIScript.scr.y * 4.25f, IMGUIScript.scr.x * 1.5f, IMGUIScript.scr.y * 0.45f), "Eat"))
                 {
                     //wear the thing
                 }
@@ -226,7 +226,7 @@ public class Inventory : MonoBehaviour
                 break;
         }
         //discard button 
-        if (GUI.Button(new Rect(5.5f * IMGUIScript.scr.x, IMGUIScript.scr.y * 3.25f, IMGUIScript.scr.x * 1.5f, IMGUIScript.scr.y * 0.45f), "Discard"))
+        if (GUI.Button(new Rect(5.5f * IMGUIScript.scr.x, IMGUIScript.scr.y * 4.25f, IMGUIScript.scr.x * 1.5f, IMGUIScript.scr.y * 0.45f), "Discard"))
         {
             //check if the item is equipped
             for (int i = 0; i < equippedItemSlot.Length; i++)

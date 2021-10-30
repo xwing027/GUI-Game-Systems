@@ -50,6 +50,20 @@ public class Interact : MonoBehaviour
                     }
                 }
                 #endregion
+
+                #region Chest
+                //if the collider we hit is tagged Item
+                if (hitInfo.collider.CompareTag("Chest")) //this does the same as the above, just a different way to write it
+                {
+                    //debug that we hit an Item
+                    Debug.Log("Item");
+                    Chest currentChest = hitInfo.transform.GetComponent<Chest>();
+                    if (currentChest != null)
+                    {
+                        currentChest.showChest = !currentChest.showChest;
+                    }
+                }
+                #endregion
             }
         }
     }
